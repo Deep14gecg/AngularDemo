@@ -1,0 +1,109 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Blog</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li  class="nav-item">
+        <a class="nav-link" (click)="chooseMode('add')">Add Blogs</a>
+      </li>
+      <li *ngIf = 'theUser' class="nav-item">
+        <a class="nav-link" (click)="chooseMode('')">Manage Blogs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/admin']">Back to admin</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <div class="form-inline my-2 my-lg-0">
+      <button class="btn btn-outline-light my-2 my-sm-0" (click)='logout()' >Logout</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container" [ngSwitch] = 'menuChoice'>
+  <div *ngSwitchCase="'add'" class="card">
+    <div class="card-body">
+      <app-blog-add></app-blog-add>
+    </div>
+  </div>
+  <div *ngSwitchDefault  class="card">
+    <div class="card-body">
+      <div *ngIf='formDisplay' class="row">
+        <div class="card">
+          <div class="card-body" *ngFor='let posts of blogPosts'>
+            <div class="row">
+            <div class="media">
+              <img class="align-self-center mr-3" [src]="posts.img" height="100px" alt="Generic placeholder image">
+              <div class="media-body">
+                <h5 class="mt-0">{{posts.title}}</h5>
+                <p class="mb-0">{{posts.content | trunc:140}}</p>
+              </div>
+            </div>
+
+          </div>
+          <div class="row align-self-center">
+            <button class="col-4 btn btn-primary" (click)="editPost(posts)" type="button" name="button">Edit</button>
+            <button class="col-4 btn btn-danger" (click)="deletePost(posts)" type="button" name="button">Delete</button>
+          </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf='!formDisplay'>
+        <div class="row">
+          <div class="col">
+            <label>Post Title</label>
+          </div>
+          <div class="col-8">
+            <input [(ngModel)]="singlePost.title" name="postTitle" type="text" class='form-control' placeholder="Enter post title" #psTitle="ngModel" required>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <label>Post Content</label>
+          </div>
+          <div class="col-8">
+            <textarea rows='15' [(ngModel)]="singlePost.content" name="content" type="text" class='form-control' placeholder="Enter Your content here" #psContent="ngModel" required></textarea>
+          </div>
+        </div>
+
+
+        <div class="row justify-content-center">
+          <div class="col-8">
+            <img  [src]="singlePost.img" height="100px" alt="Image Preview..">
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-4">
+            <button class="btn btn-success" [disabled]="!psTitle.valid || !psContent.valid" (click)="updatePost(singlePost)" type="button" name="button">Update Post</button>
+          </div>
+          <div class="col-4">
+            <button class="btn btn-danger"  (click)="cancelEdit()" type="button" name="button2">Cancel Edit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

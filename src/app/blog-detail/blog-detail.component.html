@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+<div class="card">
+  <div class="card-header">
+    {{singlePost?.title}}
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <img [src]="singlePost?.img" alt="image" height="350px">
+    </div>
+    <div class="row">
+      <p>{{singlePost?.content}}</p>
+    </div>
+    <div>
+      <button [routerLink]="['']" class='btn btn-lg btn-default '>back</button>
+
+    </div>
+  </div>
+
+</div>

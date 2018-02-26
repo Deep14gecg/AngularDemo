@@ -1,0 +1,18 @@
+<div class="form-signin">
+      <img class="mb-4 mx-auto d-block" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
+      <label  class="sr-only">Email address</label>
+       <input type="email" id="email" class="form-control" placeholder="Email address" [(ngModel)]='email' #em='ngModel' required autofocus>
+       <div [hidden]='em.valid || em.pristine' class="alert alert-danger" role="alert"  >
+         Email is required.
+       </div>
+      <label  class="sr-only">Password</label>
+      <input type="password" id="password1" class="form-control" placeholder="Password" [(ngModel)]='password1' #pwd1='ngModel'  required>
+      <div [hidden]='pwd1.valid || pwd1.pristine' class="alert alert-danger" role="alert"  >
+        password is required.
+      </div>
+      <button class="btn  btn-success btn-block" (click)='login()'>Login</button>
+      <button class="btn  btn-primary btn-block" (click)='signup()'>SignUp</button>
+      <button class="btn  btn-primary btn-block" (click)='cancel()'>Cancel</button>
+      <p class="mt-5 mb-3 text-muted ">&copy; 2017-2018</p>
+    </div>

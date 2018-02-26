@@ -1,0 +1,45 @@
+<div class="card">
+  <div class="card-header text-center">
+    <h2>Add a Post</h2>
+  </div>
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col">
+        <label>Post Title</label>
+      </div>
+      <div class="col-8">
+        <input [(ngModel)]="postTitle" name="postTitle" type="text" class='form-control' placeholder="Enter post title" #psTitle="ngModel" required>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <label>Post Content</label>
+      </div>
+      <div class="col-8">
+        <textarea rows='15' [(ngModel)]="content" name="content" type="text" class='form-control' placeholder="Enter Your content here" #psContent="ngModel" required></textarea>
+      </div>
+    </div>
+
+
+    <div class="row justify-content-center">
+      <div class="col">
+        <input (change)="fileLoad($event)" name="postTitle" type="file" class='form-control' >
+      </div>
+      <div class="col-8">
+        <img *ngIf = "imageSRC" [src]="imageSRC" alt="Image Preview..">
+      </div>
+    </div>
+
+    <div class="row ">
+      <div class="col-4">
+        <button class="btn btn-success" [disabled]="!psTitle.valid || !psContent.valid" (click)="createPost()" type="button" name="button">Create Post</button>
+      </div>
+      <div class="col-4">
+        <button class="btn btn-danger"  (click)="cancel()" type="button" name="button2">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
